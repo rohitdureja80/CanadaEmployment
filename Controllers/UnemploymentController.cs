@@ -26,7 +26,7 @@ namespace CanadaEmployment.Controllers
 
         [HttpGet]
         [EnableQuery]
-        public IActionResult Get()
+        public IQueryable<UnemploymentModel> Get()
         {
             List<UnemploymentModel> data = _db.GetUnemploymentData();
             DataMessage<UnemploymentModel> dataMessage = new DataMessage<UnemploymentModel>();
@@ -34,13 +34,14 @@ namespace CanadaEmployment.Controllers
             Meta meta = new Meta();
             meta.totalRecords = data.Count();
             dataMessage.meta = meta;
-            //IQueryable<UnemploymentModel> query = data.AsQueryable();
-            return Ok(dataMessage);
+            IQueryable<UnemploymentModel> query = data.AsQueryable();
+            return query;
+            //return Ok(dataMessage);
         }
 
         [HttpGet("{location}")]
         [EnableQuery]
-        public IActionResult GetUnemploymentDataByLocation(string location)
+        public IQueryable<UnemploymentModel> GetUnemploymentDataByLocation(string location)
         {
             List<UnemploymentModel> data = _db.GetUnemploymentData(location);
             DataMessage<UnemploymentModel> dataMessage = new DataMessage<UnemploymentModel>();
@@ -48,8 +49,9 @@ namespace CanadaEmployment.Controllers
             Meta meta = new Meta();
             meta.totalRecords = data.Count();
             dataMessage.meta = meta;
-            //IQueryable<UnemploymentModel> query = data.AsQueryable();
-            return Ok(dataMessage);
+            IQueryable<UnemploymentModel> query = data.AsQueryable();
+            return query;
+            //return Ok(dataMessage);
         }
 
     }
