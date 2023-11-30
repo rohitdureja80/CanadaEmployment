@@ -400,3 +400,6 @@ FodyWeavers.xsd
 # Other Project Specific files
 *.sln
 appsettings*.json
+.config
+Properties/serviceDependencies*.json
+Properties/ServiceDependencies*
