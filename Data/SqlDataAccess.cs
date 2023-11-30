@@ -18,6 +18,7 @@ namespace CanadaEmployment.Data
         }
         private SqlConnection GetConnectionString()
         {
+            _logger.LogInformation("getting connection string");
             return new SqlConnection(_configuration.GetConnectionString("SqlConnectionString"));
         }
 
@@ -27,6 +28,7 @@ namespace CanadaEmployment.Data
             using (var conn = this.GetConnectionString())
             {
                 conn.Open();
+                _logger.LogInformation("sql db connection initiated");
                 SqlCommand command = new SqlCommand(Constants.StoredProcedures.GET_UNEMPLOYMENT_DATA, conn);
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataReader reader = command.ExecuteReader();

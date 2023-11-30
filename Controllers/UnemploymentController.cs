@@ -28,6 +28,7 @@ namespace CanadaEmployment.Controllers
         [EnableQuery]
         public IActionResult Get()
         {
+            _logger.LogInformation("*********** Unemployment Controller Initiated **************");
             List<UnemploymentModel> data = _db.GetUnemploymentData();
             return Ok(data);
         }
