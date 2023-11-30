@@ -26,33 +26,10 @@ namespace CanadaEmployment.Controllers
 
         [HttpGet]
         [EnableQuery]
-        public IQueryable<UnemploymentModel> Get()
+        public IActionResult Get()
         {
             List<UnemploymentModel> data = _db.GetUnemploymentData();
-            DataMessage<UnemploymentModel> dataMessage = new DataMessage<UnemploymentModel>();
-            dataMessage.data = data;
-            Meta meta = new Meta();
-            meta.totalRecords = data.Count();
-            dataMessage.meta = meta;
-            IQueryable<UnemploymentModel> query = data.AsQueryable();
-            return query;
-            //return Ok(dataMessage);
+            return Ok(data);
         }
-
-        [HttpGet("{location}")]
-        [EnableQuery]
-        public IQueryable<UnemploymentModel> GetUnemploymentDataByLocation(string location)
-        {
-            List<UnemploymentModel> data = _db.GetUnemploymentData(location);
-            DataMessage<UnemploymentModel> dataMessage = new DataMessage<UnemploymentModel>();
-            dataMessage.data = data;
-            Meta meta = new Meta();
-            meta.totalRecords = data.Count();
-            dataMessage.meta = meta;
-            IQueryable<UnemploymentModel> query = data.AsQueryable();
-            return query;
-            //return Ok(dataMessage);
-        }
-
     }
 }
