@@ -13,6 +13,7 @@ modelBuilder.EntitySet<UnemploymentModel>("Unemployment");
 
 builder.Services.AddSingleton<IDataAccess, SqlDataAccess>();
 
+// allows for odata features 
 builder.Services.AddControllers().AddOData(options => options.Select().Filter()
                 .OrderBy().SetMaxTop(null)
                 .AddRouteComponents(
@@ -36,7 +37,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseRouting();
+app.UseRouting();
 app.UseAuthorization();
 //app.UseEndpoints(endpoints => endpoints.MapControllers());
 app.MapControllers();
